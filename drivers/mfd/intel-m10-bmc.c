@@ -24,7 +24,9 @@ static struct mfd_cell m10bmc_pacn3000_subdevs[] = {
 	{ .name = "n3000bmc-secure" },
 };
 
-static struct mfd_cell m10bmc_n5010_bmc_subdevs[] = {};
+static struct mfd_cell m10bmc_n5010_bmc_subdevs[] = {
+	{ .name = "n5010bmc-hwmon" },
+};
 
 static void
 m10bmc_init_cells_platdata(struct intel_m10bmc_platdata *pdata,
