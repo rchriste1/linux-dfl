@@ -423,11 +423,15 @@ static ssize_t filename_store(struct device *dev, struct device_attribute *attr,
 		goto unlock_exit;
 	}
 
-	smgr->filename = kstrndup(buf, count - 1, GFP_KERNEL);
+	smgr->filename = kstrndup(buf, count, GFP_KERNEL);
 	if (!smgr->filename) {
 		ret = -ENOMEM;
 		goto unlock_exit;
 	}
+
+	/* remove trailing newline */
+	if (smgr->filename[count - 1] == '\n')
+		smgr->filename[count - 1] = '\0';
 
 	smgr->err_code = FPGA_SEC_ERR_NONE;
 	smgr->hw_errinfo = 0;
